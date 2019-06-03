@@ -43,14 +43,18 @@ from time import sleep
 
 (w, h) = (1920, 1080)
 var = 0.15
-cooldown = 10
+cooldown = 15
 process_id = int(input("Enter PID: "))
 def clicks():
     wrapper.click_input(coords=(int(0.50 * w), int(0.50 * h)))
     wrapper.click_input(coords=(int((0.50 - var) * w), int(0.50 * h)))
-    wrapper.click_input(coords=(int(0.50 * w), int((0.50 + var) * h)))
-    wrapper.click_input(coords=(int((0.50 + var) * w), int(0.50 * h)))
+    #wrapper.click_input(coords=(int((0.50 - var) * w), int((0.50 - var) * h)))
     wrapper.click_input(coords=(int(0.50 * w), int((0.50 - var) * h)))
+    #wrapper.click_input(coords=(int((0.50 + var) * w), int((0.50 - var) * h)))
+    wrapper.click_input(coords=(int((0.50 + var) * w), int(0.50 * h)))
+    #wrapper.click_input(coords=(int((0.50 + var) * w), int((0.50 + var) * h)))
+    wrapper.click_input(coords=(int(0.50 * w), int((0.50 + var) * h)))
+    #wrapper.click_input(coords=(int((0.50 - var) * w), int((0.50 + var) * h)))
     wrapper.minimize()
 
 app = Application().connect(process=process_id)
