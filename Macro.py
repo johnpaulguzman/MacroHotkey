@@ -20,16 +20,41 @@ def mammonite(actuator):
 
 
 if __name__ == '__main__':
+    pass
+    """
     actuator = Actuator()
-    """ combos = {
+    combos = {
         ('shift', 'f9'): (restart, ),
         ('shift', 'f12'): (stop, ),
         ('z'): (mammonite, actuator),
     }
     h = HotkeyHandler(combos, debug=True)
-    h.start()"""
-    (pressed, counter) = (False, 0)
+    h.start()
+    execute = False
     while True:
-        if pressed == False and pressed != keyboard.is_pressed('shift'): counter += 1
-        if counter % 2 == 1: mammonite(actuator)
-        sleep(0.1)
+        if keyboard.is_pressed('['): execute = True
+        elif keyboard.is_pressed(']'): execute = False
+        if execute: mammonite(actuator)
+        sleep(0.05)
+    """
+
+from pywinauto.application import Application
+from time import sleep
+
+(w, h) = (1920, 1080)
+var = 0.15
+cooldown = 10
+process_id = int(input("Enter PID: "))
+def clicks():
+    wrapper.click_input(coords=(int(0.50 * w), int(0.50 * h)))
+    wrapper.click_input(coords=(int((0.50 - var) * w), int(0.50 * h)))
+    wrapper.click_input(coords=(int(0.50 * w), int((0.50 + var) * h)))
+    wrapper.click_input(coords=(int((0.50 + var) * w), int(0.50 * h)))
+    wrapper.click_input(coords=(int(0.50 * w), int((0.50 - var) * h)))
+    wrapper.minimize()
+
+app = Application().connect(process=process_id)
+wrapper = app.window().wrapper_object()
+while(True):
+    clicks()
+    sleep(cooldown)
